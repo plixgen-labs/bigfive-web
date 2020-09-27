@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 const { getInfo } = require('@alheimsins/b5-johnson-120-ipip-neo-pi-r')
 const { languages } = getInfo()
+const langCodes = languages.map(lang => lang.id)
 
 export default class extends Component {
   constructor (props) {
@@ -9,10 +10,10 @@ export default class extends Component {
     this.state = {
       toggleLang: false
     }
-    this.toggleLang = this.toggleLang.bind(this)
+    this.handleToggleLang = this.handleToggleLang.bind(this)
   }
 
-  toggleLang () {
+  handleToggleLang () {
     this.setState({ toggleLang: !this.state.toggleLang })
   }
 
@@ -22,13 +23,13 @@ export default class extends Component {
       <div className='lang'>
         {
           !this.state.toggleLang &&
-            languages.filter(langCode => langCode === 'en' || selectedLanguage === langCode).map(langCode => <span key={langCode} onClick={() => switchLanguage(langCode)} className={selectedLanguage === langCode ? 'languageSelected' : 'language'}>{langCode} </span>)
+          langCodes.filter(langCode => langCode === 'en' || selectedLanguage === langCode).map(langCode => <span key={langCode} onClick={() => switchLanguage(langCode)} className={selectedLanguage === langCode ? 'languageSelected' : 'language'}>{langCode} </span>)
         }
         {
           this.state.toggleLang &&
-            languages.map(langCode => <span key={langCode} onClick={() => switchLanguage(langCode)} className={selectedLanguage === langCode ? 'languageSelected' : 'language'}>{langCode} </span>)
+          langCodes.map(langCode => <span key={langCode} onClick={() => switchLanguage(langCode)} className={selectedLanguage === langCode ? 'languageSelected' : 'language'}>{langCode} </span>)
         }
-        <span className='language' onClick={this.toggleLang}> { this.state.toggleLang ? <FaAngleLeft /> : <FaAngleRight /> }</span>
+        <span className='language' onClick={this.handleToggleLang}> {this.state.toggleLang ? <FaAngleLeft /> : <FaAngleRight />}</span>
         <style jsx>
           {`
             .language {

@@ -5,18 +5,17 @@ export default ({ user, info }) => (
     <div className='nav-container'>
       <div className='links-container'>
         <Link route='/' activeClassName='active'><a>HOME</a></Link>
-        <Link route='/test' prefetch activeClassName='active'><a>TEST</a></Link>
-        <Link route='/result' prefetch activeClassName='active'><a>RESULT</a></Link>
+        <Link route='/test' activeClassName='active'><a>TEST</a></Link>
+        <Link route='/result' activeClassName='active'><a>RESULT</a></Link>
         <Link route='/compare' activeClassName='active'><a>COMPARE</a></Link>
         <Link route='/about' activeClassName='active'><a>ABOUT</a></Link>
       </div>
       <div className='nav-right'>
-        { user
+        {user
           ? <span>logged in as <b>{user}</b></span>
-          : <a href='/api/login' style={{ color: 'black' }}>LOGIN</a>
-        }
+          : <a href='/api/login' style={{ color: 'black' }}>LOGIN</a>}
       </div>
-      { info && <div className='nav-info'>{info}</div> }
+      {info && <div className='nav-info'>{info}</div>}
     </div>
     <style jsx>
       {`

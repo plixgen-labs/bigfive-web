@@ -1,16 +1,4 @@
-###########################################################
-#
-# Dockerfile for bigfive-web
-#
-###########################################################
-
-# Setting the base to nodejs 10
-FROM mhart/alpine-node:10@sha256:9bd7335945983dfebf84cf4ce841d6dd1f28f261b61dd09d97f4138199bf0b83
-
-# Maintainer
-MAINTAINER Jonas Enge
-
-#### Begin setup ####
+FROM mhart/alpine-node:12
 
 # Extra tools for native dependencies
 RUN apk add --no-cache make gcc g++ python git
@@ -19,7 +7,7 @@ RUN apk add --no-cache make gcc g++ python git
 COPY . /src
 
 # Change working directory
-WORKDIR "/src"
+WORKDIR /src
 
 # Install dependencies
 RUN npm install --production

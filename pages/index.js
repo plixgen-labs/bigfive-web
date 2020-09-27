@@ -6,7 +6,8 @@ import { getInfo } from '@alheimsins/b5-johnson-120-ipip-neo-pi-r'
 import withI18next from '../hoc/withI18next'
 
 const { languages } = getInfo()
-const languageList = languages.map(code => ({ code, name: ISO6391.getName(code) }))
+const langCodes = languages.map(lang => lang.id)
+const languageList = langCodes.map(code => ({ code, name: ISO6391.getName(code) }))
 
 const startTest = e => {
   e.preventDefault()
@@ -15,7 +16,7 @@ const startTest = e => {
 }
 
 const Home = ({ countryCode, t }) => {
-  const defaultLanguage = languages.includes(countryCode) ? countryCode : 'en'
+  const defaultLanguage = langCodes.includes(countryCode) ? countryCode : 'en'
   return (
     <div>
       <div style={{ paddingBottom: '20px', borderBottom: '1px solid rgb(234, 234, 234)' }}>
@@ -24,7 +25,7 @@ const Home = ({ countryCode, t }) => {
       <div style={{ textAlign: 'left', margin: 'auto', fontSize: '14px', width: '100%' }}>
         <p>{t('home:paragraphs:first')}</p>
         <p>
-          {t('home:paragraphs:test_evaluation')} <a href='http://ipip.ori.org' rel='noopener' target='_blank'>ipip.ori.org</a>
+          {t('home:paragraphs:test_evaluation')} <a href='http://ipip.ori.org' rel='noopener noreferrer' target='_blank'>ipip.ori.org</a>
           <FaExternalLinkAlt size='8' style={{ verticalAlign: 'top' }} />, {t('home:paragraphs:inventory_is_from')} <i>{t('home:paragraphs:name_inventor')}</i>.
         </p>
         <p> {t('home:paragraphs:the_following')} <b>{t('home:paragraphs:10_minutes')}</b> {t('home:paragraphs:to_complete')}</p>

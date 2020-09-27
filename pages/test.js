@@ -39,7 +39,7 @@ export default class extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleBack = this.handleBack.bind(this)
     this.switchLanguage = this.switchLanguage.bind(this)
-    this.clearAnswers = this.clearAnswers.bind(this)
+    this.handleClearAnswers = this.handleClearAnswers.bind(this)
   }
 
   componentDidMount () {
@@ -65,7 +65,7 @@ export default class extends Component {
     }
   }
 
-  clearAnswers () {
+  handleClearAnswers () {
     clearItems()
     window.location.reload(true)
   }
@@ -144,15 +144,15 @@ export default class extends Component {
         </div>
         <ProgressBar progress={progress} />
         {
-          restore && <p onClick={this.clearAnswers} style={{ color: '#FF0080', marginTop: '10px', cursor: 'pointer' }}><FaInfoCircle /> Your state is restored from LocalStorage. Click here to start over again.</p>
+          restore && <p onClick={this.handleClearAnswers} style={{ color: '#FF0080', marginTop: '10px', cursor: 'pointer' }}><FaInfoCircle /> Your state is restored from LocalStorage. Click here to start over again.</p>
         }
-        { items.map(item =>
+        {items.map(item =>
           <div key={item.id} className={lang === 'ur' ? 'item inverted-text' : 'item'}>
             <div className='question'>
-              { item.text }
+              {item.text}
             </div>
             <RadioGroup name={item.id} onChange={handleChange} checked={answers[item.id] && answers[item.id].score}>
-              { item.choices.map(choice =>
+              {item.choices.map(choice =>
                 <Radio key={item.id + choice.score} value={choice.score} color='5' text={choice.text} style={{ display: 'block' }} />
               )}
             </RadioGroup>
